@@ -65,9 +65,12 @@ export default async function DashboardLayout({ children }: { children: ReactNod
               <LogoutLink>Logout</LogoutLink>
             </DropdownMenuItem>
           </DropdownMenuContent>
-
         </DropdownMenu>
       </header>
+
+      <main className="my-5">
+        {children}
+      </main>
     </div>
   ) 
 }
