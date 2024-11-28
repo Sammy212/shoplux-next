@@ -51,6 +51,22 @@ export default function ProductCreateRoute() {
                                 <Label>Featured Product</Label>
                                 <Switch />
                             </div>
+
+                            <div className="w-full gap-2">
+                                <Label>Category</Label>
+                                <Select>
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Select Category"/>
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="uncategorized">Uncategorized </SelectItem>
+                                        <SelectItem value="men">Men</SelectItem>
+                                        <SelectItem value="women">Women</SelectItem>
+                                        <SelectItem value="kids">Kids</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
+                            
                             <div className="w-full gap-2">
                                 <Label>Status</Label>
                                 <Select>
