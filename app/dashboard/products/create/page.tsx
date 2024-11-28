@@ -2,7 +2,7 @@
 import { UploadDropzone } from "@/app/lib/uploadthing";
 import { OurFileRouter } from "@/app/api/uploadthing/core";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -73,10 +73,25 @@ export default function ProductCreateRoute() {
                                 onUploadError={(error: Error) => {
                                     alert(`ERROR! ${error.message}`);
                                 }}
+                                onClientUploadComplete={(res) => {
+                                    alert("Product Image Upload Completed");
+                                }}
+                                appearance={{
+                                    button: {
+                                        backgroundColor: "black"
+                                    },
+                                    uploadIcon: {
+                                        color: "CaptionText"
+                                    },
+                                }}
                             />
                         </div>
                     </div>
                 </CardContent>
+
+                <CardFooter>
+                    <Button>Create Product</Button>
+                </CardFooter>
             </Card>
         </form>
     )
