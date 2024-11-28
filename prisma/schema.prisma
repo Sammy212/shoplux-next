@@ -43,6 +43,7 @@ enum ProductStatus {
 }
 
 enum Category {
+  uncategorized
   men
   women
   kids

@@ -17,6 +17,7 @@ import { parseWithZod } from "@conform-to/zod";
 import { productSchema } from "@/app/lib/zodSchemas";
 import { useState } from "react";
 import Image from "next/image";
+import { categories } from "@/app/lib/categories";
 
 export default function ProductCreateRoute() {
 
@@ -124,10 +125,13 @@ export default function ProductCreateRoute() {
                                         <SelectValue placeholder="Select Category"/>
                                     </SelectTrigger>
                                     <SelectContent>
-                                        <SelectItem value="uncategorized">Uncategorized </SelectItem>
-                                        <SelectItem value="men">Men</SelectItem>
-                                        <SelectItem value="women">Women</SelectItem>
-                                        <SelectItem value="kids">Kids</SelectItem>
+                                        {
+                                            categories.map((category) => (
+                                                <SelectItem key={category.id} value={category.name}>
+                                                    {category.title}
+                                                </SelectItem>
+                                            ))
+                                        }
                                     </SelectContent>
                                 </Select>
                                 {/* error message */}
@@ -157,6 +161,12 @@ export default function ProductCreateRoute() {
 
                         <div className="flex flex-col gap-3">
                             <Label>Add Product Images</Label>
+                            <input type="hidden" 
+                                value={images} 
+                                key={fields.images.key}
+                                name={fields.images.name}
+                                defaultValue={fields.images.initialValue as any}
+                            />
                             {
                                 images.length > 0 ? (
                                     <div className="flex gap-5">
@@ -200,6 +210,8 @@ export default function ProductCreateRoute() {
                                     />
                                 )
                             }
+                            {/* error message */}
+                            <p className="text-red-500 text-xs">{fields.images.errors}</p>
                         </div>
                     </div>
                 </CardContent>
