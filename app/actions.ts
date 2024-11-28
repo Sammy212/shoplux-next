@@ -24,13 +24,18 @@ export async function createProduct(prevState: unknown, formData: FormData) {
         return submission.reply();
     }
 
+    // Slit images url array into onjects
+    const flattenUrls = submission.value.images.flatMap((urlString) =>
+        urlString.split(",").map((url) => url.trim())
+    );
+
     await prisma.product.create({
         data: {
             name: submission.value.name,
             description: submission.value.description,
             status: submission.value.status,
             price: submission.value.price,
-            images: submission.value.images,
+            images: flattenUrls,
             category: submission.value.category,
             isFeatured: submission.value.isFeatured,
         },
