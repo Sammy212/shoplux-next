@@ -23,7 +23,10 @@ export default async function DashboardLayout({ children }: { children: ReactNod
   const user = await getUser();
 
   // check if user is authenticated
-  if(!user || user.email !== "samuelafo.212@gmail.com") {
+  if(
+    !user 
+    // || user.email !== "samuelafo.212@gmail.com"
+  ) {
     return redirect("/");
   }
 
