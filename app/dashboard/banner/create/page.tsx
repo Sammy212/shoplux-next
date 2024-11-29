@@ -38,7 +38,7 @@ export default function BannerRoute() {
                             <Label>Images</Label>
 
                             <UploadDropzone 
-                                endpoint="imageUploader"
+                                endpoint="bannerImageRoute"
                                 onUploadError={(error: Error) => {
                                     alert(`ERROR! ${error.message}`);
                                 }}
