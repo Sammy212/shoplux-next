@@ -34,6 +34,12 @@ export default async function ProductPage({
         <>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start lg:gap-x-24 py-6">
                 <ImageSlider images={data.images}/>
+                <div>
+                    <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
+                        {data.name}
+                    </h1>
+                    <p className="mt-2 text-3xl text-gray-900">₦{data.price.toLocaleString()}</p>
+                </div>
             </div>
         </>
     )
