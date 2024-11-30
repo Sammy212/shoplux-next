@@ -2,6 +2,7 @@ import Link from "next/link";
 import { NavbarLinks } from "./NavbarLinks";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { ShoppingBag } from "lucide-react";
+import { UserDropdown } from "./UserDropdown";
 
 export async function Navbar() {
 
@@ -23,7 +24,7 @@ export async function Navbar() {
                 <NavbarLinks />
             </div>
 
-            <div className="flex">
+            <div className="flex items-center">
                 {/* get user session to render login or register elements|components */}
                 {
                     user ? (
@@ -31,8 +32,13 @@ export async function Navbar() {
                             <Link href="/bag"
                                 className="group p-2 flex items-center mr-2"
                             >
-                                <ShoppingBag />
+                                <ShoppingBag
+                                    className="h-6 w-6 text-gray-400 group-hover:text-gray-600"
+                                />
+                                <span className="ml-2 text-sm font-medium text-gray-400 group-hover:text-gray-800">5</span>
+
                             </Link>
+                            <UserDropdown/>
                         </>
                     ) : (
                         <h1>Not authenticated</h1>
