@@ -35,6 +35,7 @@ export default async function ProductsRoute() {
                 <CardHeader>
                     <CardTitle>Products</CardTitle>
                     <CardDescription>Manage your products and view product sales performance</CardDescription>
+                    <CardDescription><Link href="/" target="_blank"><span className="text-black underline">Click Here</span> to view changes/update on store front</Link></CardDescription>
                 </CardHeader>
 
                 <CardContent>
@@ -63,7 +64,7 @@ export default async function ProductsRoute() {
                                         </TableCell>
                                         <TableCell>{item.name}</TableCell>
                                         <TableCell>{item.status}</TableCell>
-                                        <TableCell>₦{item.price}.00</TableCell>
+                                        <TableCell>₦{item.price.toLocaleString()}.00</TableCell>
                                         <TableCell>{new Intl.DateTimeFormat("en-US").format(item.createdAt)}</TableCell>
                                         <TableCell className="text-end">
                                             <DropdownMenu>

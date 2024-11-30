@@ -60,8 +60,6 @@ export function CategoriesSelection() {
                         </Link>
                     </div>
                 </div>
-
-
             </div>
         </div>
     )

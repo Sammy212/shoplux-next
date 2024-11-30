@@ -39,6 +39,7 @@ export default async function BannerRoute() {
                 <CardHeader>
                     <CardTitle>Banners</CardTitle>
                     <CardDescription>Manage your site banners</CardDescription>
+                    <CardDescription><Link href="/" target="_blank"><span className="text-black underline">Click Here</span> to view changes/update on store front</Link></CardDescription>
                 </CardHeader>
 
                 <CardContent>
