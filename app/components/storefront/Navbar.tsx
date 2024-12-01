@@ -13,7 +13,7 @@ export async function Navbar() {
     const user = await getUser();
 
     return (
-        <nav className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
+        <nav className="sticky top-0 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between bg-white z-50">
             <div className="flex">
 
                 {/* Site Logo */}

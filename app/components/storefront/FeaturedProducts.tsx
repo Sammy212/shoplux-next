@@ -15,8 +15,9 @@ async function getData() {
             price: true,
         },
         orderBy: {
-            createdAt: "asc",
+            createdAt: "desc",
         },
+        take: 3,
     });
 
     return data;
