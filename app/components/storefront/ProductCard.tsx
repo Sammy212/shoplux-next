@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -46,7 +47,10 @@ export function ProductCard({ item }: iAppProps) {
             <p className="text-gray-600 text-sm mt-2 text-justify line-clamp-2 px-2">{item.description}</p>
             <div className="flex mt-5 justify-between">
                 <Button variant="outline" asChild><Link href={`/product/${item.id}`}>View Product</Link></Button>
-                <Button>Add to Cart</Button>
+
+                <Button asChild>
+                    <Link href={`/product/${item.id}`}><ShoppingBag className="mr-1 h-5 w-5"/> Add to Bag</Link>
+                </Button>
             </div>
         </div>
     )

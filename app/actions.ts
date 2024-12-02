@@ -5,6 +5,8 @@ import { parseWithZod } from "@conform-to/zod"
 import { bannerSchema, productSchema } from "./lib/zodSchemas";
 import prisma from "./lib/db";
 import { title } from "process";
+import { redis } from "./lib/redis";
+import { Cart } from "./lib/interfaces";
 
 
 // create products
@@ -151,4 +153,80 @@ export async function deleteBanner(formData: FormData) {
 
     // After delete redirect
     redirect("/dashboard/banner");
+}
+
+// Redis State for cart managment
+export async function addItem(productId: string) {
+    // protect with kinde auth
+    const {getUser} = getKindeServerSession();
+    const user = await getUser();
+
+    if(!user) {
+        return redirect("/");
+    }
+
+    // Connect user cart to his userId | from Cart Interface
+    let cart: Cart | null = await redis.get(`cart-${user.id}`);
+
+
+    // fetch product data from prism
+    const selectedProduct = await prisma.product.findUnique({
+        select: {
+            id: true,
+            name: true,
+            price: true,
+            images: true
+        },
+        where: {
+            id: productId,
+        },
+    });
+
+    // verify product exist in db
+    if(!selectedProduct) {
+        throw new Error("Product doesn't exist");
+    }
+
+    let myCart = {} as Cart;
+
+    // verify content in cart or created cart
+    if(!cart || !cart.items) {
+        myCart = {
+            userId: user.id,
+            items: [{
+                quantity: 1,
+                id: selectedProduct.id,
+                name: selectedProduct.name,
+                price: selectedProduct.price,
+                imageString: selectedProduct.images[0],
+            },],
+        };
+    } else {
+        // if item exist in user's cart update the quantity by 1
+        let itemFound = false;
+
+        myCart.items = cart.items.map((item) => {
+            if(item.id === productId) {
+                itemFound = true;
+                item.quantity += 1;
+            }
+
+            return item;
+        });
+
+        // if item is not in user's cart | push the item to user's cart
+        if(!itemFound) {
+            myCart.items.push({
+                quantity: 1,
+                id: selectedProduct.id,
+                name: selectedProduct.name,
+                price: selectedProduct.price,
+                imageString: selectedProduct.images[0],
+            })
+        }
+    }
+
+    
+    // provide redis with user's cartid and cart content
+    await redis.set(`cart-${user.id}`, myCart);
 }
