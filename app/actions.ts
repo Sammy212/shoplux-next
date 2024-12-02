@@ -7,6 +7,7 @@ import prisma from "./lib/db";
 import { title } from "process";
 import { redis } from "./lib/redis";
 import { Cart } from "./lib/interfaces";
+import { revalidatePath } from "next/cache";
 
 
 // create products
@@ -226,7 +227,9 @@ export async function addItem(productId: string) {
         }
     }
 
-    
     // provide redis with user's cartid and cart content
     await redis.set(`cart-${user.id}`, myCart);
+
+    // revalitate to show update to user's bag/ cart 
+    revalidatePath("/", "layout");
 }

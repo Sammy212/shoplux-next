@@ -1,6 +1,7 @@
 import { addItem } from "@/app/actions";
 import { FeaturedProduct } from "@/app/components/storefront/FeaturedProducts";
 import { ImageSlider } from "@/app/components/storefront/ImageSlider";
+import { ShoppingBagButton } from "@/app/components/SubmitButtons";
 import prisma from "@/app/lib/db"
 import { Button } from "@/components/ui/button";
 import { ShoppingBag, StarIcon } from "lucide-react";
@@ -69,9 +70,7 @@ export default async function ProductPage({
 
                     {/* add to bag form */}
                     <form action={addProductToShoppingCart}>
-                        <Button size="lg" className="w-full mt-16">
-                            <ShoppingBag className="mr-4 h-5 w-5"/> Add to Bag
-                        </Button>
+                        <ShoppingBagButton/>
                     </form>
                 </div>
             </div>

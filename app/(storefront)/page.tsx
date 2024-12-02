@@ -9,7 +9,7 @@ export default function IndexPage() {
             <Hero/>
             <CategoriesSelection/>
             <FeaturedProduct/>
-            Home Page
+            
         </div>
     )
 };
