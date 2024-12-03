@@ -9,6 +9,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 async function getData(productId: string) {
+    // await new Promise((resolve) => setTimeout(resolve, 5000))
     const data = await prisma.product.findUnique({
         where: {
             id: productId,
