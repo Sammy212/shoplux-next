@@ -156,7 +156,7 @@ export async function deleteBanner(formData: FormData) {
     redirect("/dashboard/banner");
 }
 
-// Redis State for cart managment
+// Redis State for cart managment | Add items to cart
 export async function addItem(productId: string) {
     // protect with kinde auth
     const {getUser} = getKindeServerSession();
@@ -232,4 +232,31 @@ export async function addItem(productId: string) {
 
     // revalitate to show update to user's bag/ cart 
     revalidatePath("/", "layout");
+}
+
+
+// remove Items from cart
+export async function removeItem(formData: FormData) {
+    // protect with kinde auth
+    const {getUser} = getKindeServerSession();
+    const user = await getUser();
+
+    if(!user) {
+        return redirect("/");
+    }
+
+    const productId = formData.get("productId");
+
+    let cart: Cart | null = await redis.get(`cart-${user.id}`);
+
+    if (cart && cart.items) {
+        const updateCart: Cart = {
+            userId: user.id,
+            items: cart.items.filter((item) => item.id !== productId),
+        };
+
+        await redis.set(`cart-${user.id}`, updateCart);
+    }
+
+    revalidatePath("/bag");
 }

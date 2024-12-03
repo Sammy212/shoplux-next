@@ -1,9 +1,12 @@
+import { removeItem } from "@/app/actions";
+import { DeleteItem } from "@/app/components/SubmitButtons";
 import { Cart } from "@/app/lib/interfaces";
 import { redis } from "@/app/lib/redis";
 import { Button } from "@/components/ui/button";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { OctagonX } from "lucide-react";
+import { OctagonX, ShoppingBag } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 
@@ -31,8 +34,22 @@ export default async function BagRoute() {
         <div className="max-w-2xl mx-auto mt-10 mb-10">
             {
                 cart?.items.length === 0 ? (
-                    <div className="fle">
-                        <h1>Your shopping bag is empty</h1>
+                    <div className="flex min-h-[55vh] flex-col items-center justify-center rounded-lg border-dashed p-8 text-center mt-20">
+                        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
+                            <ShoppingBag
+                                className="w-10 h-10 text-primary"
+                            />
+                        </div>
+                        <h1
+                            className="mt-6 text-xl font-bold"
+                        >
+                            Your shopping bag is empty <br />
+                            <Link href="/products/all"
+                                className="text-sm font-normal hover:text-gray-300"
+                            >
+                                Add items
+                            </Link>
+                        </h1>
                     </div>
                 ): (
                     <div className="flex flex-col gap-y-10">
@@ -55,18 +72,24 @@ export default async function BagRoute() {
 
                                         <div className="flex flex-col h-full justify-between">
                                             <div className="flex items-center gap-2">
-                                                <p className="fle">{item.quantity} x</p>
+                                                <p className="fle">{item.quantity} X</p>
                                                 <p className="fle">₦{item.price.toLocaleString()}</p>
                                             </div>
 
-                                            <p className="font-medium text-primary text-end flex justify-end items-center gap-1 hover:text-gray-300 cursor-pointer">
+                                            
+                                            <form action={removeItem}
+                                                className="flex justify-end items-center gap-1 hover:text-gray-300 cursor-pointer"
+                                            >
+                                                <input type="hidden" name="productId"  value={item.id} />
                                                 <OctagonX 
                                                     className="w-4 h-4"
                                                 />
-                                                Delete
-                                            </p>
+                                                <DeleteItem/>
+                                            </form>
                                         </div>
+
                                     </div>
+
                                 </div>
                             ))
                         }
