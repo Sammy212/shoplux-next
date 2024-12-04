@@ -1,14 +1,12 @@
-import { removeItem } from "@/app/actions";
-import { DeleteItem } from "@/app/components/SubmitButtons";
+import { checkOut, removeItem } from "@/app/actions";
+import { ChceckoutButton, DeleteItem } from "@/app/components/SubmitButtons";
 import { Cart } from "@/app/lib/interfaces";
 import { redis } from "@/app/lib/redis";
-import { Button } from "@/components/ui/button";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { OctagonX, ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 
 export default async function BagRoute() {
 
@@ -99,12 +97,9 @@ export default async function BagRoute() {
                                 <p>₦{totalPrice.toLocaleString()}</p>
                             </div>
 
-                            <Button
-                                size="lg" className="w-full mt-5"
-                            >
-                                <MdOutlineShoppingCartCheckout />
-                                Checkout
-                            </Button>
+                            <form action={checkOut}>
+                                <ChceckoutButton/>
+                            </form>
                         </div>
                     </div>
                 )
