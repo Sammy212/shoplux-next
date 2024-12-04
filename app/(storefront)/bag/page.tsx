@@ -51,6 +51,11 @@ export default async function BagRoute() {
                     </div>
                 ): (
                     <div className="flex flex-col gap-y-10">
+                        <p>Please use this&nbsp; 
+                            <a href="https://drive.google.com/file/d/1XzmAE-_udPUrTgAPieTTVComnNCmdNnu/view?usp=sharing" target="_blank" className="text-black font-semibold underline hover:text-gray-300 cursor-pointer">
+                             test card</a> to checkout&nbsp;
+                            <a href="https://docs.stripe.com/testing" target="_blank" className="text-black font-semibold underline hover:text-gray-300 cursor-pointer">view stripe docs</a>
+                        </p>
                         {
                             cart?.items.map((item) => (
                                 <div 
