@@ -7,8 +7,11 @@ import { OctagonX, ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { unstable_noStore as noStore } from "next/cache";
 
 export default async function BagRoute() {
+
+    noStore();
 
     // Check user auth
     const {getUser} = getKindeServerSession();

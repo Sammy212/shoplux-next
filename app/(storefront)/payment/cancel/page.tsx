@@ -16,9 +16,7 @@ export default function CancelRoute() {
 
                     <div className="mt-3 text-center sm:mt-5 w-full">
                         <h3 className="text-xl leading-6 font-bold">Payment Cancelled</h3>
-                        <p className="flex flex-col justify-center mt-2 text-muted-foreground text-sm">
-                            Something went wrong, payment unsuccessfull. You haven't been charged. Please try again  
-                        </p>
+                        <p className="flex flex-col justify-center mt-2 text-muted-foreground text-sm">Something went wrong, payment unsuccessfull. You have not been charged. Please try again</p>
 
                         <Button asChild className="w-full mt-5 sm:mt-6">
                             <Link href="/bag" className="">View Shopping Bag</Link>

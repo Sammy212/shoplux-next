@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ShoppingBag, StarIcon } from "lucide-react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { unstable_noStore as noStore } from "next/cache";
 
 async function getData(productId: string) {
     // await new Promise((resolve) => setTimeout(resolve, 5000))
@@ -34,6 +35,8 @@ export default async function ProductPage({
     params,
 }: {params: {id: string}
 }) {
+
+    noStore();
 
     const data = await getData(params.id);
     const addProductToShoppingCart = addItem.bind(null, data.id)
