@@ -31,7 +31,7 @@ export default async function BagRoute() {
     return (
         <div className="max-w-2xl mx-auto mt-10 mb-10">
             {
-                cart?.items.length === 0 ? (
+                !cart || !cart.items ? (
                     <div className="flex min-h-[55vh] flex-col items-center justify-center rounded-lg border-dashed p-8 text-center mt-20">
                         <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
                             <ShoppingBag
