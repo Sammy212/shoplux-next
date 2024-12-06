@@ -77,7 +77,7 @@ export default function ProductCreateRoute() {
                             {/* Product price */}
                             <div className="w-full">
                                 <Label>Product Price</Label>
-                                <Input type="number" placeholder="$ Price"
+                                <Input type="number" placeholder="₦ Price"
                                     key={fields.price.key}
                                     name={fields.price.name}
                                     defaultValue={fields.price.initialValue}
