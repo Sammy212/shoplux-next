@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { NavbarLinks } from "./NavbarLinks";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { ShoppingBag } from "lucide-react";
+import { MenuIcon, ShoppingBag } from "lucide-react";
 import { UserDropdown } from "./UserDropdown";
 import { Button } from "@/components/ui/button";
 import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { redis } from "@/app/lib/redis";
 import { Cart } from "@/app/lib/interfaces";
-
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 export async function Navbar() {
 
     // initialize kinde to get user session
@@ -22,16 +22,37 @@ export async function Navbar() {
 
     return (
         <nav className="sticky top-0 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between bg-white z-50">
-            <div className="flex">
+            <div className="flex items-center">
 
                 {/* Site Logo */}
                 <Link href="/">
-                    <h1 className="text-gray-400 font-bold text-xl lg:text-4xl">
+                    <h1 className="text-gray-400 font-bold text-xl lg:text-4xl ">
                         shop<span className="text-black">Lux</span>
                     </h1>
                 </Link>
 
                 <NavbarLinks />
+
+
+                <div className="hidden md:block">
+                {
+                    user ? (
+                        <Link href="/dashboard" 
+                            className="p-2 ml-3 font-bold text-slate-900 hover:text-gray-300"
+                        >
+                            View Admin
+                        </Link>
+                        
+                    ) : (
+                        <Link href="/api/auth/register?" 
+                            className="p-2 ml-3 font-bold text-slate-900 hover:text-gray-300"
+                        >
+                            Sign In to View Admin
+                        </Link>
+                        
+                    )
+                }
+                </div>              
             </div>
 
             <div className="flex items-center">
@@ -61,11 +82,49 @@ export async function Navbar() {
                             </Button>
                             <span className="h-6 w-px bg-gray-200"></span>
                             <Button asChild>
-                                <RegisterLink>Create Account</RegisterLink>
+                                <RegisterLink>Sign up</RegisterLink>
                             </Button>
                         </div>
                     )
                 }
+                {/* Mobile Menu */}
+                <Sheet>
+                    <SheetTrigger asChild>
+                        <Button 
+                            className="shrink-0 md:hidden ml-2"
+                            variant="outline"
+                            size="icon"
+                        >
+                            <MenuIcon className="h-5 w-5"/>                                                     
+                        </Button>
+                    </SheetTrigger>
+                    <SheetContent side="right">
+                        <nav className="flex flex-col gap-6 text-lg font-medium mt-5">
+                            {/* <NavbarLinks /> */}
+                            <Link href="/men">Men</Link>
+                            <Link href="/men">Women</Link>
+                            <Link href="/men">All Products</Link>
+                            <div className="sm:block">
+                                {
+                                    user ? (
+                                        <Link href="/dashboard" 
+                                            className="font-bold text-slate-900 hover:text-gray-300"
+                                        >
+                                            View Admin
+                                        </Link>
+                                        
+                                    ) : (
+                                        <Link href="/api/auth/register?" 
+                                            className="font-bold text-slate-900 hover:text-gray-300"
+                                        >
+                                            Sign In to View Admin
+                                        </Link>
+                                    )
+                                }
+                            </div> 
+                        </nav>
+                    </SheetContent>
+                </Sheet>                 
             </div>
         </nav>
     )

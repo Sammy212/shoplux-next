@@ -1,8 +1,9 @@
 "use client";
 
-import { cn } from "@/lib/utils"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+  
 
 export const navbarLinks = [
     {
@@ -36,7 +37,7 @@ export function NavbarLinks() {
 
     const location = usePathname()
     return (
-        <div className="hidden md:flex justify-center items-center gap-x-4 ml-8">
+        <nav className="hidden md:flex justify-center items-center gap-x-4 ml-8">
             {
                 navbarLinks.map((item) => (
                     <Link 
@@ -52,6 +53,6 @@ export function NavbarLinks() {
                     </Link>
                 ))
             }
-        </div>
+        </nav>
     )
 }
