@@ -8,7 +8,7 @@ export function Footer() {
                 <p className="text-xs leading-5 text-gray-700">&copy; shopLux 2024</p>
                 <p className="text-sm leading-5 text-gray-700 flex gap-2">
                      Created by 
-                    <a href="https://samuel-afolabi.netlify.app/" 
+                    <a href="https://samuel-afo.vercel.app/" 
                         target="_blank" 
                         className="flex justify-center items-center gap-1 text-sm text-black font-bold hover:text-gray-400"
                     >
